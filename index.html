@@ -4,180 +4,456 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Personal Card</title>
+<meta name="theme-color" content="#090e18">
+<title>Shaxriyor | Personal Card</title>
 
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;
- min-height:100vh;
- padding:25px 16px;
- display:flex;
- align-items:center;
- justify-content:center;
- font-family:Arial,sans-serif;
- background:linear-gradient(135deg,#080d19,#142849,#21123b);
- color:white;
+:root {
+  --bg: #090e18;
+  --surface: #111b2b;
+  --surface2: #172438;
+  --gold: #d8bd8a;
+  --gold-light: #f0dfbd;
+  --white: #f5f5f3;
+  --muted: #9aa8ba;
+  --line: rgba(216,189,138,.19);
 }
-.card{
- width:100%;
- max-width:390px;
- padding:30px 23px;
- border-radius:25px;
- background:rgba(19,31,53,.95);
- border:1px solid #405777;
- box-shadow:0 20px 60px #0008;
- text-align:center;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-.avatar{
- width:90px;
- height:90px;
- margin:auto auto 17px;
- display:flex;
- align-items:center;
- justify-content:center;
- border-radius:50%;
- font-size:38px;
- background:linear-gradient(135deg,#267bff,#963bff);
- border:3px solid #718fff;
+
+body {
+  min-height: 100vh;
+  padding: 35px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:
+    radial-gradient(ellipse at 50% 0%, #243653 0%, transparent 50%),
+    linear-gradient(145deg,#080c14,#101b2c 55%,#090d17);
+  color: var(--white);
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Arial, sans-serif;
 }
-h1{font-size:25px;margin:8px 0}
-.subtitle{
- color:#a9bad4;
- font-size:12px;
- letter-spacing:2px;
- margin-bottom:28px;
+
+.container {
+  width: 100%;
+  max-width: 420px;
+  animation: appear .8s ease;
 }
-.info{
- background:#263a58;
- border:1px solid #405879;
- padding:16px;
- margin:13px 0;
- border-radius:14px;
- text-align:left;
+
+@keyframes appear {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
 }
-.label{
- font-size:11px;
- color:#a8c4ed;
- margin-bottom:8px;
+
+.card {
+  position: relative;
+  overflow: hidden;
+  padding: 34px 25px 25px;
+  border: 1px solid var(--line);
+  border-radius: 27px;
+  background: linear-gradient(
+    155deg,
+    rgba(24,38,59,.98),
+    rgba(12,20,33,.99) 65%
+  );
+  box-shadow: 0 25px 80px #0008;
 }
-.value{
- font-size:16px;
- font-weight:bold;
- word-break:break-word;
+
+.card::before {
+  content:"";
+  position:absolute;
+  width:240px;
+  height:240px;
+  border-radius:50%;
+  background:#c5a46b;
+  filter:blur(110px);
+  opacity:.09;
+  top:-140px;
+  right:-90px;
+  pointer-events:none;
 }
-.clickable{
- cursor:pointer;
- transition:.2s;
+
+.header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:35px;
 }
-.clickable:active{transform:scale(.97)}
-.hint{
- font-size:11px;
- color:#9fb7d8;
- margin-top:9px;
+
+.brand {
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:3px;
+  color:var(--gold);
 }
-.social{
- display:block;
- padding:16px;
- margin-top:13px;
- border-radius:13px;
- text-decoration:none;
- color:white;
- font-weight:bold;
- font-size:15px;
- transition:.2s;
+
+.online {
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:10px;
+  color:#b6c4ba;
+  letter-spacing:1px;
 }
-.social:active{transform:scale(.97)}
-.telegram{background:#229ED9}
-.instagram{
- background:linear-gradient(100deg,#833ab4,#fd1d1d,#fcb045);
+
+.dot {
+  width:7px;
+  height:7px;
+  background:#68c99b;
+  border-radius:50%;
+  box-shadow:0 0 10px #68c99b;
 }
-.footer{
- margin-top:25px;
- font-size:11px;
- color:#8499b9;
+
+.profile {
+  text-align:center;
+  padding-bottom:27px;
+  border-bottom:1px solid var(--line);
 }
-#toast{
- position:fixed;
- bottom:35px;
- left:50%;
- transform:translateX(-50%);
- background:#263a58;
- color:white;
- padding:13px 22px;
- border-radius:30px;
- font-size:13px;
- opacity:0;
- transition:.3s;
- pointer-events:none;
- white-space:nowrap;
+
+.avatar {
+  width:100px;
+  height:100px;
+  margin:0 auto 19px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:38px;
+  color:var(--gold-light);
+  background:linear-gradient(145deg,#354b66,#111b2b);
+  border:1px solid var(--gold);
+  box-shadow:0 0 0 7px rgba(216,189,138,.06);
 }
-#toast.show{opacity:1}
+
+.name {
+  font-size:27px;
+  font-weight:700;
+  letter-spacing:.2px;
+  color:#fff;
+}
+
+.lastname {
+  color:var(--gold-light);
+}
+
+.subtitle {
+  margin-top:9px;
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:3px;
+}
+
+.section-title {
+  margin:26px 0 13px;
+  color:var(--gold);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:2px;
+}
+
+.info-box {
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:15px;
+  padding:16px;
+  margin-bottom:11px;
+}
+
+.info-top {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.info-label {
+  font-size:10px;
+  letter-spacing:1.4px;
+  color:var(--muted);
+}
+
+.info-icon {
+  font-size:17px;
+  color:var(--gold);
+}
+
+.info-value {
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:.3px;
+  word-break:break-word;
+  color:#f3f3f0;
+}
+
+.copy-box {
+  width:100%;
+  text-align:left;
+  color:inherit;
+  cursor:pointer;
+  font-family:inherit;
+  transition:.25s;
+}
+
+.copy-box:hover {
+  border-color:rgba(216,189,138,.5);
+  background:rgba(216,189,138,.06);
+}
+
+.copy-bottom {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:13px;
+  padding-top:11px;
+  border-top:1px solid rgba(255,255,255,.06);
+  font-size:10px;
+  color:var(--gold);
+  letter-spacing:.5px;
+}
+
+.social-title {
+  margin:27px 0 13px;
+  font-size:10px;
+  color:var(--gold);
+  letter-spacing:2px;
+  font-weight:700;
+}
+
+.social {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px 17px;
+  margin-bottom:11px;
+  text-decoration:none;
+  color:white;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:14px;
+  background:rgba(255,255,255,.035);
+  transition:.25s;
+}
+
+.social:hover {
+  transform:translateY(-2px);
+  border-color:var(--gold);
+  background:rgba(216,189,138,.08);
+}
+
+.social-left {
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.social-icon {
+  width:39px;
+  height:39px;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  font-size:19px;
+  background:#24364c;
+}
+
+.social-name {
+  font-size:14px;
+  font-weight:600;
+}
+
+.social-desc {
+  font-size:10px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+.arrow {
+  color:var(--gold);
+  font-size:19px;
+}
+
+.footer {
+  margin-top:27px;
+  padding-top:17px;
+  text-align:center;
+  border-top:1px solid var(--line);
+}
+
+.footer-brand {
+  font-size:10px;
+  letter-spacing:2px;
+  color:var(--gold);
+}
+
+.footer-copy {
+  margin-top:8px;
+  color:#718096;
+  font-size:10px;
+}
+
+#toast {
+  position:fixed;
+  bottom:28px;
+  left:50%;
+  transform:translate(-50%,20px);
+  padding:13px 20px;
+  background:#1e3440;
+  border:1px solid #52766c;
+  border-radius:30px;
+  color:#fff;
+  font-size:12px;
+  opacity:0;
+  transition:.3s;
+  pointer-events:none;
+  z-index:10;
+  white-space:nowrap;
+}
+
+#toast.show {
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+@media(max-width:380px) {
+  .card {padding:27px 18px 22px}
+  .name {font-size:23px}
+  .info-value {font-size:13px}
+}
 </style>
 </head>
 
 <body>
 
+<main class="container">
 <div class="card">
 
- <div class="avatar">👤</div>
+  <header class="header">
+    <div class="brand">PERSONAL IDENTITY</div>
+    <div class="online">
+      <span class="dot"></span>
+      DIGITAL CARD
+    </div>
+  </header>
 
- <h1>Axmatov Shaxriyor</h1>
- <div class="subtitle">PERSONAL DIGITAL CARD</div>
+  <section class="profile">
+    <div class="avatar">S</div>
 
- <div class="info">
-  <div class="label">📞 TELEFON RAQAM</div>
-  <div class="value">+998 88 672 23 01</div>
- </div>
+    <h1 class="name">
+      <span class="lastname">Shaxriyor</span> Axmatov
+    </h1>
 
- <div class="info clickable" onclick="copyCard()">
-  <div class="label">💳 PLASTIK KARTA</div>
-  <div class="value" id="cardNumber">
-   6262 9102 3653 4095
+    <p class="subtitle">PERSONAL DIGITAL PROFILE</p>
+  </section>
+
+  <div class="section-title">PERSONAL INFORMATION</div>
+
+  <div class="info-box">
+    <div class="info-top">
+      <span class="info-label">TELEFON RAQAM</span>
+      <span class="info-icon">⌕</span>
+    </div>
+    <div class="info-value">+998 88 672 23 01</div>
   </div>
-  <div class="hint">📋 Nusxalash uchun bosing</div>
- </div>
 
- <a class="social telegram"
- href="https://t.me/Akhmatuv"
- target="_blank">
- ✈ TELEGRAM
- </a>
+  <button class="info-box copy-box" onclick="copyCard()">
+    <div class="info-top">
+      <span class="info-label">PLASTIK KARTA</span>
+      <span class="info-icon">▤</span>
+    </div>
 
- <a class="social instagram"
- href="https://instagram.com/Akhmatuv23"
- target="_blank">
- ◎ INSTAGRAM
- </a>
+    <div class="info-value" id="cardNumber">
+      6262 9102 3653 4095
+    </div>
 
- <div class="footer">
-  © 2026 PERSONAL DIGITAL CARD
- </div>
+    <div class="copy-bottom">
+      <span>↗ KARTA RAQAMINI NUSXALASH</span>
+      <span> COPY </span>
+    </div>
+  </button>
+
+  <div class="social-title">SOCIAL CONNECTIONS</div>
+
+  <a class="social"
+     href="https://t.me/Akhmatuv"
+     target="_blank"
+     rel="noopener noreferrer">
+
+    <div class="social-left">
+      <div class="social-icon">✈</div>
+      <div>
+        <div class="social-name">Telegram</div>
+        <div class="social-desc">@Akhmatuv</div>
+      </div>
+    </div>
+    <span class="arrow">↗</span>
+  </a>
+
+  <a class="social"
+     href="https://instagram.com/Akhmatuv23"
+     target="_blank"
+     rel="noopener noreferrer">
+
+    <div class="social-left">
+      <div class="social-icon">◎</div>
+      <div>
+        <div class="social-name">Instagram</div>
+        <div class="social-desc">@Akhmatuv23</div>
+      </div>
+    </div>
+    <span class="arrow">↗</span>
+  </a>
+
+  <footer class="footer">
+    <div class="footer-brand">SHAKHRIYOR · PERSONAL CARD</div>
+    <div class="footer-copy">© 2026 ALL RIGHTS RESERVED</div>
+  </footer>
 
 </div>
+</main>
 
-<div id="toast">✓ Karta raqami nusxalandi!</div>
+<div id="toast">✓ Karta raqami nusxalandi</div>
 
 <script>
-function copyCard(){
- const number=document.getElementById("cardNumber")
- .innerText.trim();
+async function copyCard() {
+  const number = document
+    .getElementById("cardNumber")
+    .innerText.trim();
 
- if(number.includes("X")){
-  showToast("Karta raqamini hali kiritmagansiz!");
-  return;
- }
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(number);
+    } else {
+      const input = document.createElement("textarea");
+      input.value = number;
+      input.style.position = "fixed";
+      input.style.opacity = "0";
+      document.body.appendChild(input);
+      input.select();
+      const success = document.execCommand("copy");
+      input.remove();
+      if (!success) throw new Error("Copy failed");
+    }
 
- navigator.clipboard.writeText(number)
- .then(()=>showToast("✓ Karta raqami nusxalandi!"))
- .catch(()=>showToast("Nusxalash amalga oshmadi"));
+    showToast("✓ Karta raqami nusxalandi!");
+  } catch(e) {
+    showToast("Nusxalash amalga oshmadi");
+  }
 }
 
-function showToast(message){
- const toast=document.getElementById("toast");
- toast.innerText=message;
- toast.classList.add("show");
- setTimeout(()=>toast.classList.remove("show"),2200);
+let toastTimer;
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2300);
 }
 </script>
 
