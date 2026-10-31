@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Personal Card</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ min-height:100vh;
+ padding:25px 16px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-family:Arial,sans-serif;
+ background:linear-gradient(135deg,#080d19,#142849,#21123b);
+ color:white;
+}
+.card{
+ width:100%;
+ max-width:390px;
+ padding:30px 23px;
+ border-radius:25px;
+ background:rgba(19,31,53,.95);
+ border:1px solid #405777;
+ box-shadow:0 20px 60px #0008;
+ text-align:center;
+}
+.avatar{
+ width:90px;
+ height:90px;
+ margin:auto auto 17px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ border-radius:50%;
+ font-size:38px;
+ background:linear-gradient(135deg,#267bff,#963bff);
+ border:3px solid #718fff;
+}
+h1{font-size:25px;margin:8px 0}
+.subtitle{
+ color:#a9bad4;
+ font-size:12px;
+ letter-spacing:2px;
+ margin-bottom:28px;
+}
+.info{
+ background:#263a58;
+ border:1px solid #405879;
+ padding:16px;
+ margin:13px 0;
+ border-radius:14px;
+ text-align:left;
+}
+.label{
+ font-size:11px;
+ color:#a8c4ed;
+ margin-bottom:8px;
+}
+.value{
+ font-size:16px;
+ font-weight:bold;
+ word-break:break-word;
+}
+.clickable{
+ cursor:pointer;
+ transition:.2s;
+}
+.clickable:active{transform:scale(.97)}
+.hint{
+ font-size:11px;
+ color:#9fb7d8;
+ margin-top:9px;
+}
+.social{
+ display:block;
+ padding:16px;
+ margin-top:13px;
+ border-radius:13px;
+ text-decoration:none;
+ color:white;
+ font-weight:bold;
+ font-size:15px;
+ transition:.2s;
+}
+.social:active{transform:scale(.97)}
+.telegram{background:#229ED9}
+.instagram{
+ background:linear-gradient(100deg,#833ab4,#fd1d1d,#fcb045);
+}
+.footer{
+ margin-top:25px;
+ font-size:11px;
+ color:#8499b9;
+}
+#toast{
+ position:fixed;
+ bottom:35px;
+ left:50%;
+ transform:translateX(-50%);
+ background:#263a58;
+ color:white;
+ padding:13px 22px;
+ border-radius:30px;
+ font-size:13px;
+ opacity:0;
+ transition:.3s;
+ pointer-events:none;
+ white-space:nowrap;
+}
+#toast.show{opacity:1}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+ <div class="avatar">👤</div>
+
+ <h1>Axmatov Shaxriyor</h1>
+ <div class="subtitle">PERSONAL DIGITAL CARD</div>
+
+ <div class="info">
+  <div class="label">📞 TELEFON RAQAM</div>
+  <div class="value">+998 88 672 23 01</div>
+ </div>
+
+ <div class="info clickable" onclick="copyCard()">
+  <div class="label">💳 PLASTIK KARTA</div>
+  <div class="value" id="cardNumber">
+   6262 9102 3653 4095
+  </div>
+  <div class="hint">📋 Nusxalash uchun bosing</div>
+ </div>
+
+ <a class="social telegram"
+ href="https://t.me/Akhmatuv"
+ target="_blank">
+ ✈ TELEGRAM
+ </a>
+
+ <a class="social instagram"
+ href="https://instagram.com/Akhmatuv23"
+ target="_blank">
+ ◎ INSTAGRAM
+ </a>
+
+ <div class="footer">
+  © 2026 PERSONAL DIGITAL CARD
+ </div>
+
+</div>
+
+<div id="toast">✓ Karta raqami nusxalandi!</div>
+
+<script>
+function copyCard(){
+ const number=document.getElementById("cardNumber")
+ .innerText.trim();
+
+ if(number.includes("X")){
+  showToast("Karta raqamini hali kiritmagansiz!");
+  return;
+ }
+
+ navigator.clipboard.writeText(number)
+ .then(()=>showToast("✓ Karta raqami nusxalandi!"))
+ .catch(()=>showToast("Nusxalash amalga oshmadi"));
+}
+
+function showToast(message){
+ const toast=document.getElementById("toast");
+ toast.innerText=message;
+ toast.classList.add("show");
+ setTimeout(()=>toast.classList.remove("show"),2200);
+}
+</script>
+
+</body>
+</html>
