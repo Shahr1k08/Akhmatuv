@@ -4,458 +4,485 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090e18">
-<title>Shaxriyor | Personal Card</title>
+<meta name="theme-color" content="#080b18">
+<title>Glass Vision | Shaxriyor</title>
 
 <style>
-:root {
-  --bg: #090e18;
-  --surface: #111b2b;
-  --surface2: #172438;
-  --gold: #d8bd8a;
-  --gold-light: #f0dfbd;
-  --white: #f5f5f3;
-  --muted: #9aa8ba;
-  --line: rgba(216,189,138,.19);
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+ --cyan:#58eaff;
+ --blue:#5685ff;
+ --violet:#a879ff;
+ --white:#f4f8ff;
+ --muted:#9baac4;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+body{
+ min-height:100svh;
+ display:grid;
+ place-items:center;
+ padding:18px;
+ overflow-x:hidden;
+ font-family:Inter,Arial,sans-serif;
+ color:var(--white);
+ background:#080b18;
+ position:relative;
 }
 
-body {
-  min-height: 100vh;
-  padding: 35px 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background:
-    radial-gradient(ellipse at 50% 0%, #243653 0%, transparent 50%),
-    linear-gradient(145deg,#080c14,#101b2c 55%,#090d17);
-  color: var(--white);
-  font-family: -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Arial, sans-serif;
+body:before,body:after{
+ content:"";
+ position:fixed;
+ width:300px;
+ height:300px;
+ border-radius:50%;
+ filter:blur(100px);
+ opacity:.35;
+ pointer-events:none;
+}
+body:before{
+ background:#225bff;
+ top:-130px;
+ left:-130px;
+}
+body:after{
+ background:#923cff;
+ bottom:-130px;
+ right:-130px;
 }
 
-.container {
-  width: 100%;
-  max-width: 420px;
-  animation: appear .8s ease;
+.ambient{
+ position:fixed;
+ inset:0;
+ pointer-events:none;
+ background:
+ radial-gradient(ellipse at 50% 50%,#122c4d66,transparent 65%),
+ linear-gradient(130deg,transparent,#16213b44,transparent);
 }
 
-@keyframes appear {
-  from { opacity:0; transform:translateY(20px); }
-  to { opacity:1; transform:translateY(0); }
+.container{
+ width:100%;
+ max-width:370px;
+ position:relative;
+ z-index:1;
 }
 
-.card {
-  position: relative;
-  overflow: hidden;
-  padding: 34px 25px 25px;
-  border: 1px solid var(--line);
-  border-radius: 27px;
-  background: linear-gradient(
-    155deg,
-    rgba(24,38,59,.98),
-    rgba(12,20,33,.99) 65%
-  );
-  box-shadow: 0 25px 80px #0008;
+.card{
+ position:relative;
+ overflow:hidden;
+ padding:23px;
+ border-radius:26px;
+ border:1px solid #a4caff35;
+ background:linear-gradient(
+  145deg,
+  #ffffff12,
+  #ffffff05 45%,
+  #8b72ff0b
+ );
+ backdrop-filter:blur(25px);
+ -webkit-backdrop-filter:blur(25px);
+ box-shadow:
+  0 25px 80px #0008,
+  inset 0 1px 1px #ffffff25;
 }
 
-.card::before {
-  content:"";
-  position:absolute;
-  width:240px;
-  height:240px;
-  border-radius:50%;
-  background:#c5a46b;
-  filter:blur(110px);
-  opacity:.09;
-  top:-140px;
-  right:-90px;
-  pointer-events:none;
+.card:before{
+ content:"";
+ position:absolute;
+ width:190px;
+ height:190px;
+ border-radius:50%;
+ background:#50dfff;
+ filter:blur(100px);
+ opacity:.13;
+ top:-100px;
+ right:-90px;
+ pointer-events:none;
 }
 
-.header {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:35px;
+.top{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ padding-bottom:17px;
+ border-bottom:1px solid #ffffff18;
 }
 
-.brand {
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:3px;
-  color:var(--gold);
+.brand{
+ font-size:11px;
+ letter-spacing:3px;
+ font-weight:800;
+}
+.brand span{color:var(--cyan)}
+
+.live{
+ display:flex;
+ align-items:center;
+ gap:7px;
+ font-size:9px;
+ color:#8df7d0;
+ letter-spacing:1px;
 }
 
-.online {
-  display:flex;
-  align-items:center;
-  gap:7px;
-  font-size:10px;
-  color:#b6c4ba;
-  letter-spacing:1px;
+.live i{
+ width:7px;
+ height:7px;
+ background:#52e7a5;
+ border-radius:50%;
+ box-shadow:0 0 12px #52e7a5;
 }
 
-.dot {
-  width:7px;
-  height:7px;
-  background:#68c99b;
-  border-radius:50%;
-  box-shadow:0 0 10px #68c99b;
+.profile{
+ text-align:center;
+ padding:24px 0 20px;
 }
 
-.profile {
-  text-align:center;
-  padding-bottom:27px;
-  border-bottom:1px solid var(--line);
+.avatar-wrap{
+ width:88px;
+ height:88px;
+ margin:0 auto 15px;
+ padding:3px;
+ border-radius:26px;
+ background:linear-gradient(135deg,var(--cyan),var(--violet),var(--blue));
+ box-shadow:0 0 30px #5685ff40;
 }
 
-.avatar {
-  width:100px;
-  height:100px;
-  margin:0 auto 19px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  font-size:38px;
-  color:var(--gold-light);
-  background:linear-gradient(145deg,#354b66,#111b2b);
-  border:1px solid var(--gold);
-  box-shadow:0 0 0 7px rgba(216,189,138,.06);
+.avatar{
+ width:100%;
+ height:100%;
+ border-radius:23px;
+ display:grid;
+ place-items:center;
+ background:#10192b;
+ font-size:34px;
+ font-weight:800;
+ color:white;
 }
 
-.name {
-  font-size:27px;
-  font-weight:700;
-  letter-spacing:.2px;
-  color:#fff;
+.name{
+ font-size:25px;
+ font-weight:750;
+ letter-spacing:-.7px;
 }
 
-.lastname {
-  color:var(--gold-light);
+.name span{
+ background:linear-gradient(90deg,var(--cyan),#b8a0ff);
+ -webkit-background-clip:text;
+ background-clip:text;
+ color:transparent;
 }
 
-.subtitle {
-  margin-top:9px;
-  color:var(--muted);
-  font-size:10px;
-  letter-spacing:3px;
+.tag{
+ display:inline-block;
+ margin-top:9px;
+ padding:6px 12px;
+ border-radius:20px;
+ border:1px solid #58eaff30;
+ background:#58eaff0c;
+ color:var(--cyan);
+ font-size:9px;
+ letter-spacing:1.5px;
 }
 
-.section-title {
-  margin:26px 0 13px;
-  color:var(--gold);
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:2px;
+.divider{
+ height:1px;
+ background:linear-gradient(90deg,transparent,#8d9fce44,transparent);
 }
 
-.info-box {
-  background:rgba(255,255,255,.035);
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:15px;
-  padding:16px;
-  margin-bottom:11px;
+.heading{
+ margin:19px 0 10px;
+ color:#9caec9;
+ font-size:9px;
+ font-weight:700;
+ letter-spacing:2px;
 }
 
-.info-top {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:10px;
+.info{
+ display:flex;
+ align-items:center;
+ gap:13px;
+ padding:13px;
+ margin-bottom:9px;
+ border-radius:15px;
+ border:1px solid #ffffff12;
+ background:linear-gradient(110deg,#ffffff0d,#ffffff04);
 }
 
-.info-label {
-  font-size:10px;
-  letter-spacing:1.4px;
-  color:var(--muted);
+.info-icon{
+ width:37px;
+ height:37px;
+ display:grid;
+ place-items:center;
+ border-radius:12px;
+ background:#58eaff12;
+ color:var(--cyan);
+ font-size:18px;
+ flex-shrink:0;
 }
 
-.info-icon {
-  font-size:17px;
-  color:var(--gold);
+.info-content{min-width:0;flex:1}
+
+.label{
+ font-size:9px;
+ color:var(--muted);
+ letter-spacing:1.2px;
+ margin-bottom:6px;
 }
 
-.info-value {
-  font-size:15px;
-  font-weight:600;
-  letter-spacing:.3px;
-  word-break:break-word;
-  color:#f3f3f0;
+.value{
+ font-size:14px;
+ font-weight:650;
+ overflow-wrap:anywhere;
 }
 
-.copy-box {
-  width:100%;
-  text-align:left;
-  color:inherit;
-  cursor:pointer;
-  font-family:inherit;
-  transition:.25s;
+.copy{
+ width:100%;
+ text-align:left;
+ font-family:inherit;
+ color:inherit;
+ cursor:pointer;
+ transition:.2s;
+}
+.copy:hover{
+ border-color:#58eaff60;
+ background:#58eaff12;
 }
 
-.copy-box:hover {
-  border-color:rgba(216,189,138,.5);
-  background:rgba(216,189,138,.06);
+.copy-button{
+ color:var(--cyan);
+ font-size:18px;
 }
 
-.copy-bottom {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-top:13px;
-  padding-top:11px;
-  border-top:1px solid rgba(255,255,255,.06);
-  font-size:10px;
-  color:var(--gold);
-  letter-spacing:.5px;
+.copy-hint{
+ font-size:9px;
+ color:var(--cyan);
+ margin-top:6px;
+ letter-spacing:1px;
 }
 
-.social-title {
-  margin:27px 0 13px;
-  font-size:10px;
-  color:var(--gold);
-  letter-spacing:2px;
-  font-weight:700;
+.social-heading{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin:19px 0 11px;
 }
 
-.social {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:15px 17px;
-  margin-bottom:11px;
-  text-decoration:none;
-  color:white;
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:14px;
-  background:rgba(255,255,255,.035);
-  transition:.25s;
+.social-heading b{
+ font-size:9px;
+ letter-spacing:2px;
+ color:#a9b8d3;
 }
 
-.social:hover {
-  transform:translateY(-2px);
-  border-color:var(--gold);
-  background:rgba(216,189,138,.08);
+.social-heading span{
+ color:#788aa9;
+ font-size:9px;
 }
 
-.social-left {
-  display:flex;
-  align-items:center;
-  gap:13px;
+.socials{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px;
 }
 
-.social-icon {
-  width:39px;
-  height:39px;
-  display:grid;
-  place-items:center;
-  border-radius:11px;
-  font-size:19px;
-  background:#24364c;
+.social{
+ display:flex;
+ align-items:center;
+ gap:9px;
+ padding:12px 10px;
+ min-width:0;
+ text-decoration:none;
+ color:white;
+ border:1px solid #ffffff15;
+ border-radius:14px;
+ background:#ffffff09;
+ transition:.25s;
 }
 
-.social-name {
-  font-size:14px;
-  font-weight:600;
+.social:hover{
+ transform:translateY(-3px);
+ border-color:#58eaff65;
+ background:#58eaff12;
+ box-shadow:0 7px 25px #58eaff12;
 }
 
-.social-desc {
-  font-size:10px;
-  color:var(--muted);
-  margin-top:4px;
+.social-icon{
+ width:34px;
+ height:34px;
+ display:grid;
+ place-items:center;
+ flex-shrink:0;
+ border-radius:11px;
+ background:linear-gradient(145deg,#3c82ff55,#a879ff30);
+ font-size:17px;
 }
 
-.arrow {
-  color:var(--gold);
-  font-size:19px;
+.social-name{
+ font-size:11px;
+ font-weight:700;
 }
 
-.footer {
-  margin-top:27px;
-  padding-top:17px;
-  text-align:center;
-  border-top:1px solid var(--line);
+.social-user{
+ color:var(--muted);
+ font-size:9px;
+ margin-top:4px;
 }
 
-.footer-brand {
-  font-size:10px;
-  letter-spacing:2px;
-  color:var(--gold);
+.footer{
+ margin-top:19px;
+ padding-top:14px;
+ text-align:center;
+ border-top:1px solid #ffffff15;
 }
 
-.footer-copy {
-  margin-top:8px;
-  color:#718096;
-  font-size:10px;
+.footer strong{
+ font-size:9px;
+ letter-spacing:3px;
+ color:#9eb6dc;
 }
 
-#toast {
-  position:fixed;
-  bottom:28px;
-  left:50%;
-  transform:translate(-50%,20px);
-  padding:13px 20px;
-  background:#1e3440;
-  border:1px solid #52766c;
-  border-radius:30px;
-  color:#fff;
-  font-size:12px;
-  opacity:0;
-  transition:.3s;
-  pointer-events:none;
-  z-index:10;
-  white-space:nowrap;
+.footer p{
+ margin-top:7px;
+ color:#64738d;
+ font-size:8px;
+ letter-spacing:1px;
 }
 
-#toast.show {
-  opacity:1;
-  transform:translate(-50%,0);
+#toast{
+ position:fixed;
+ z-index:10;
+ left:50%;
+ bottom:25px;
+ transform:translateX(-50%);
+ padding:12px 19px;
+ border:1px solid #58eaff55;
+ border-radius:30px;
+ background:#152b42;
+ color:white;
+ font-size:12px;
+ white-space:nowrap;
+ opacity:0;
+ transition:.25s;
+ pointer-events:none;
 }
+#toast.show{opacity:1}
 
-@media(max-width:380px) {
-  .card {padding:27px 18px 22px}
-  .name {font-size:23px}
-  .info-value {font-size:13px}
+@media(max-width:360px){
+ .card{padding:18px}
+ .name{font-size:22px}
+ .avatar-wrap{width:76px;height:76px}
 }
 </style>
 </head>
 
 <body>
+<div class="ambient"></div>
 
 <main class="container">
 <div class="card">
 
-  <header class="header">
-    <div class="brand">PERSONAL IDENTITY</div>
-    <div class="online">
-      <span class="dot"></span>
-      DIGITAL CARD
-    </div>
-  </header>
+ <header class="top">
+  <div class="brand">GLASS<span>VISION</span></div>
+  <div class="live"><i></i> DIGITAL PROFILE</div>
+ </header>
 
-  <section class="profile">
-    <div class="avatar">S</div>
-
-    <h1 class="name">
-      <span class="lastname">Shaxriyor</span> Axmatov
-    </h1>
-
-    <p class="subtitle">PERSONAL DIGITAL PROFILE</p>
-  </section>
-
-  <div class="section-title">PERSONAL INFORMATION</div>
-
-  <div class="info-box">
-    <div class="info-top">
-      <span class="info-label">TELEFON RAQAM</span>
-      <span class="info-icon">⌕</span>
-    </div>
-    <div class="info-value">+998 88 672 23 01</div>
+ <section class="profile">
+  <div class="avatar-wrap">
+   <div class="avatar">S</div>
   </div>
 
-  <button class="info-box copy-box" onclick="copyCard()">
-    <div class="info-top">
-      <span class="info-label">PLASTIK KARTA</span>
-      <span class="info-icon">▤</span>
-    </div>
+  <h1 class="name"><span>Shaxriyor</span> Axmatov</h1>
+  <div class="tag">✦ PERSONAL IDENTITY</div>
+ </section>
 
-    <div class="info-value" id="cardNumber">
-      6262 9102 3653 4095
-    </div>
+ <div class="divider"></div>
 
-    <div class="copy-bottom">
-      <span>↗ KARTA RAQAMINI NUSXALASH</span>
-      <span> COPY </span>
-    </div>
-  </button>
+ <div class="heading">PERSONAL INFORMATION</div>
 
-  <div class="social-title">SOCIAL CONNECTIONS</div>
+ <div class="info">
+  <div class="info-icon">⌕</div>
+  <div class="info-content">
+   <div class="label">PHONE NUMBER</div>
+   <div class="value">+998 88 672 23 01</div>
+  </div>
+ </div>
 
+ <button class="info copy" onclick="copyCard()">
+  <div class="info-icon">▤</div>
+  <div class="info-content">
+   <div class="label">BANK CARD</div>
+   <div class="value" id="cardNumber">6262 9102 3653 4095</div>
+   <div class="copy-hint">TAP TO COPY ↗</div>
+  </div>
+  <span class="copy-button">⧉</span>
+ </button>
+
+ <div class="social-heading">
+  <b>SOCIAL CONNECTIONS</b>
+  <span>CONNECT ↗</span>
+ </div>
+
+ <div class="socials">
   <a class="social"
      href="https://t.me/Akhmatuv"
-     target="_blank"
-     rel="noopener noreferrer">
-
-    <div class="social-left">
-      <div class="social-icon">✈</div>
-      <div>
-        <div class="social-name">Telegram</div>
-        <div class="social-desc">@Akhmatuv</div>
-      </div>
-    </div>
-    <span class="arrow">↗</span>
+     target="_blank" rel="noopener">
+   <div class="social-icon">✈</div>
+   <div>
+    <div class="social-name">Telegram</div>
+    <div class="social-user">@Akhmatuv</div>
+   </div>
   </a>
 
   <a class="social"
      href="https://instagram.com/Akhmatuv23"
-     target="_blank"
-     rel="noopener noreferrer">
-
-    <div class="social-left">
-      <div class="social-icon">◎</div>
-      <div>
-        <div class="social-name">Instagram</div>
-        <div class="social-desc">@Akhmatuv23</div>
-      </div>
-    </div>
-    <span class="arrow">↗</span>
+     target="_blank" rel="noopener">
+   <div class="social-icon">◎</div>
+   <div>
+    <div class="social-name">Instagram</div>
+    <div class="social-user">@Akhmatuv23</div>
+   </div>
   </a>
+ </div>
 
-  <footer class="footer">
-    <div class="footer-brand">SHAKHRIYOR · PERSONAL CARD</div>
-    <div class="footer-copy">© 2026 ALL RIGHTS RESERVED</div>
-  </footer>
+ <footer class="footer">
+  <strong>SHAKHRIYOR</strong>
+  <p>FUTURE IS YOUR IDENTITY · © 2026</p>
+ </footer>
 
 </div>
 </main>
 
-<div id="toast">✓ Karta raqami nusxalandi</div>
+<div id="toast">✓ Nusxalandi!</div>
 
 <script>
-async function copyCard() {
-  const number = document
-    .getElementById("cardNumber")
-    .innerText.trim();
+async function copyCard(){
+ const number=document.getElementById("cardNumber").textContent.trim();
 
-  try {
-    if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(number);
-    } else {
-      const input = document.createElement("textarea");
-      input.value = number;
-      input.style.position = "fixed";
-      input.style.opacity = "0";
-      document.body.appendChild(input);
-      input.select();
-      const success = document.execCommand("copy");
-      input.remove();
-      if (!success) throw new Error("Copy failed");
-    }
-
-    showToast("✓ Karta raqami nusxalandi!");
-  } catch(e) {
-    showToast("Nusxalash amalga oshmadi");
+ try{
+  if(navigator.clipboard && window.isSecureContext){
+   await navigator.clipboard.writeText(number);
+  }else{
+   const el=document.createElement("textarea");
+   el.value=number;
+   document.body.appendChild(el);
+   el.select();
+   const ok=document.execCommand("copy");
+   el.remove();
+   if(!ok)throw Error();
   }
+  showToast("✓ Karta raqami nusxalandi!");
+ }catch(e){
+  showToast("Nusxalash amalga oshmadi");
+ }
 }
 
-let toastTimer;
-
-function showToast(message) {
-  const toast = document.getElementById("toast");
-  toast.textContent = message;
-  toast.classList.add("show");
-
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => {
-    toast.classList.remove("show");
-  }, 2300);
+let timer;
+function showToast(message){
+ const t=document.getElementById("toast");
+ t.textContent=message;
+ t.classList.add("show");
+ clearTimeout(timer);
+ timer=setTimeout(()=>t.classList.remove("show"),2200);
 }
 </script>
-
 </body>
 </html>
